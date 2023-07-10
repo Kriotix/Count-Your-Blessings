@@ -15,7 +15,7 @@ import net.dv8tion.jda.api.requests.GatewayIntent;
 public class DCBot {
     public static void main(String[] args){
         //Bot token & builder
-        JDABuilder bot = JDABuilder.createDefault("MTEyNjM2MjkzNTE5MTY2NjcxOQ.GbSatu.C_gCRR17dnir1Gu_inn8q5q9staztsZyliw-Ss");
+        JDABuilder bot = JDABuilder.createDefault(/*Token here*/);
 
         bot
                 .setActivity(Activity.playing("Pixlies Earth!"))
