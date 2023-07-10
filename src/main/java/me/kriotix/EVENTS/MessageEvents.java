@@ -41,7 +41,7 @@ public class MessageEvents extends ListenerAdapter {
                     CHANNEL_ID = SetChannel.setChannelCommand(event);
                 }
                 else {
-                    event.getChannel().sendMessage("You do not have permission to execute this command (Administrator required.").queue();
+                    event.getChannel().sendMessage("You do not have permission to execute this command (Administrator required.)").queue();
                 }
 
                 //This check makes it so the count and /count command can only take place in the chosen channel

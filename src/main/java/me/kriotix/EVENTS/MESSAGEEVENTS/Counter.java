@@ -29,7 +29,7 @@ public class Counter {
                 //event.getChannel().sendMessage("Count is now " + count).queue();
 
             //And if the number isn't the next one...
-            } else {
+            } else if (count != 0){
                 count = 0;
                 event.getMessage().addReaction(Emoji.fromUnicode("❌")).queue();
 
@@ -39,9 +39,11 @@ public class Counter {
 
         //And this is our catch, for if it's a word. ParseInt doesn't work if it's a word
         } catch (NumberFormatException nfe) {
+            if (count != 0) {
                 count = 0;
                 event.getMessage().addReaction(Emoji.fromUnicode("❌")).queue();
-                event.getChannel().sendMessage("A word? What was the plan?!\n\nCount is now "+ count).queue();
+                event.getChannel().sendMessage("A word? What was the plan?!\n\nCount is now " + count).queue();
+            }
         }
 
         //And whatever happens, count is sent back in the end
