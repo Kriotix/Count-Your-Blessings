@@ -20,6 +20,6 @@ public class DCBot {
         bot
                 .setActivity(Activity.playing("Pixlies Earth!"))
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT, GatewayIntent.GUILD_MESSAGES)
-                .addEventListeners(new ReadyEvents(), new MessageEvents()).build();
+                .addEventListeners(new ReadyListener(), new MessageListener()).build();
     }
 }
