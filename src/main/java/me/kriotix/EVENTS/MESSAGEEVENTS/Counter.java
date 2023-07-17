@@ -12,7 +12,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 
 public class Counter {
     private static int count = 0;
-    public static int counterStart(String message, MessageReceivedEvent event) {
+    public int counterStart(String message, MessageReceivedEvent event) {
 
         //Try-catch accounts for if a user enters a word
         try {

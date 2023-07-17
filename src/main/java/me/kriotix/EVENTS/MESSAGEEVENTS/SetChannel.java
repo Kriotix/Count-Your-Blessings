@@ -14,7 +14,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import java.util.List;
 
 public class SetChannel extends ListenerAdapter{
-    public static GuildChannel setChannelCommand (MessageReceivedEvent event) {
+    public GuildChannel setChannelCommand (MessageReceivedEvent event) {
 
         //Was it necessary to use a list? Unsure. Did it work? Yes. If it ain't broke, don't fix it.
         List<GuildChannel> mentionedChannels = event.getMessage().getMentions().getChannels();

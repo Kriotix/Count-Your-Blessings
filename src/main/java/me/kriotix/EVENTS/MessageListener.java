@@ -14,12 +14,10 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import me.kriotix.EVENTS.MESSAGEEVENTS.*;
 
-import java.util.Locale;
-
 public class MessageListener extends ListenerAdapter {
 
-    public static int count = 0;
-    public GuildChannel CHANNEL_ID;
+    private int count = 0;
+    private GuildChannel CHANNEL_ID;
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
@@ -30,11 +28,11 @@ public class MessageListener extends ListenerAdapter {
 
         super.onMessageReceived(event);
 
-        //Grabs the content of the message
-        String message = event.getMessage().getContentDisplay();
+        //Grabs the content of the message & splits into a string array
+        String[] splitMessage = event.getMessage().getContentRaw().split(" ");
 
         //Checking to see if the command was entered. Is not case-sensitive.
-        if (message.toUpperCase(Locale.ROOT).contains("/SETCHANNEL")) {
+        if (splitMessage[0].equalsIgnoreCase("/setchannel")) {
 
             //Makes sure user isn't null
             if (event.getMember() == null) {
@@ -44,7 +42,8 @@ public class MessageListener extends ListenerAdapter {
             if (event.getMember().getPermissions().contains(Permission.ADMINISTRATOR)) {
 
                 //Calls the setChannelCommand & sets channel id to the return value. This is checked later.
-                CHANNEL_ID = SetChannel.setChannelCommand(event);
+                SetChannel setChannel = new SetChannel();
+                CHANNEL_ID = setChannel.setChannelCommand(event);
             }
             else {
                 event.getChannel().sendMessage("You do not have permission to execute this command (Administrator required.)").queue();
@@ -54,14 +53,15 @@ public class MessageListener extends ListenerAdapter {
         } else if (event.getGuildChannel().equals(CHANNEL_ID)){
 
             //Accounts for case-sensitivity once again
-            if (message.equalsIgnoreCase("/COUNT")) {
+            if (splitMessage[0].equalsIgnoreCase("/COUNT")) {
                 event.getChannel().sendMessage("The current count is: " + count).queue();
             }
 
             else {
                 //Takes the return value of the counter for use in the /count command
                 //Also, is obviously calling the counter to let it work at all
-                count = Counter.counterStart(message, event);
+                Counter counter = new Counter();
+                count = counter.counterStart(splitMessage[0], event);
             }
         }
 
